@@ -12,8 +12,61 @@ exports.getUsers = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { fname, lname, salutation, email, avatar } = req.body;
-    const user = new User({ fname, lname, salutation, email, avatar });
+    const {
+      userId,
+      fname,
+      lname,
+      salutation,
+      email,
+      avatar,
+      mobile,
+      address,
+      country,
+      postalCode,
+      nationality,
+      dob,
+      gender,
+      maritalStatus,
+      spouseFName,
+      spouseLName,
+      spouseSalutation,
+      hobbiesAndInterests,
+      favoriteSports,
+      preferredMusicgenres,
+      preferredMovieOrTVshows,
+    } = req.body;
+    const user = new User({
+      userId,
+      fname,
+      lname,
+      salutation,
+      email,
+      avatar,
+      mobile,
+      address,
+      country,
+      postalCode,
+      nationality,
+      dob,
+      gender,
+      maritalStatus,
+      spouseFName,
+      spouseLName,
+      spouseSalutation,
+      hobbiesAndInterests,
+      favoriteSports,
+      preferredMusicgenres,
+      preferredMovieOrTVshows,
+    });
+    const query = {
+      userId: userId,
+    };
+    const dbUser = await User.find(query);
+    if (dbUser.length > 0) {
+      return res
+        .status(409)
+        .json({ error: `User already exist with ID: ${userId}` });
+    }
     await user.save();
     res.json(user);
   } catch (err) {
@@ -25,13 +78,23 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findByIdAndUpdate(id, req.body);
-    if (!user) {
+    const query = {
+      userId: id,
+    };
+    const userToUpdate = {
+      $set: req.body,
+    };
+
+    const options = {
+      returnOriginal: false,
+    };
+    const result = await User.findOneAndUpdate(query, userToUpdate, options);
+    if (!result) {
       return res
         .status(404)
         .json({ error: `Cannot find any user with ID: ${id}` });
     }
-    const updateUser = await User.findById(id);
+    const updateUser = await User.find(query);
     res.json(updateUser);
   } catch (err) {
     console.error(err);
