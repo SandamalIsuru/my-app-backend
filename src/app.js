@@ -1,10 +1,10 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require("mongoose");
 const connectDB = require("./config/database");
 const app = express();
 const userRoutes = require("./routes/userRoutes");
 
-app.use(express.json());
 
 // Connect to the MongoDB database
 connectDB();
@@ -15,6 +15,8 @@ mongoose.connection.on("connected", () => {
 
   // Middleware and routes setup
   app.use(express.json());
+  app.use(cors());
+
   // User routes
   app.use("/api/user", userRoutes);
 
