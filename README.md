@@ -32,6 +32,7 @@ Following APIs have been implemented under this projects
 - create .env file and add following env variables in .env file. 
 
     `DB_URI`: <MONGODB_URL>
+
     `PORT`: <PORT>
 
 - Run fullowing command to run the project in locally
