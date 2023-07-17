@@ -33,7 +33,7 @@ Following APIs have been implemented under this projects
 
     `DB_URI`: <MONGODB_URL>
 
-    `PORT`: <PORT>
+    `PORT`: <YOUR_PORT>
 
 - Run fullowing command to run the project in locally
 
