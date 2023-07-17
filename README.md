@@ -27,15 +27,15 @@ Following APIs have been implemented under this projects
 
 - Run fullowing command to install necessary npm modules
 
-`npm install`
+    `npm install`
 
 - create .env file and add following env variables in .env file. 
 
-DB_URI=<MONGODB_URL>
-PORT=<PORT>
+    DB_URI=<MONGODB_URL>
+    PORT=<PORT>
 
 - Run fullowing command to run the project in locally
 
-`node src/app.js`
+    `node src/app.js`
 
 
